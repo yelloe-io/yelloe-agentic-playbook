@@ -1,0 +1,10 @@
+{
+  "name": "yelloe",
+  "version": "0.1.0",
+  "description": "The yelloe skill set for planning, building and verifying software with agents.",
+  "author": {
+    "name": "yelloe"
+  },
+  "license": "MIT",
+  "skills": []
+}

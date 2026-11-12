@@ -1,0 +1,15 @@
+{
+  "name": "yelloe-playbook",
+  "owner": {
+    "name": "yelloe"
+  },
+  "description": "The yelloe agentic playbook.",
+  "plugins": [
+    {
+      "name": "yelloe",
+      "source": "./",
+      "description": "The yelloe skill set for planning, building and verifying software with agents.",
+      "category": "engineering"
+    }
+  ]
+}
