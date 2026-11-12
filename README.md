@@ -2,7 +2,7 @@
 
 <img src="assets/logo.svg" alt="yelloe" width="240">
 
-# yelloe agentic playbook
+# YELLOE agentic playbook
 
 **How yelloe builds software with coding agents.**
 
