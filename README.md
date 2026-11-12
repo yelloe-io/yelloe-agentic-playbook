@@ -1,16 +1,16 @@
 <div align="center">
 
-<img src="assets/logo.svg" alt="yelloe" width="240">
+<img src="assets/logo.svg" alt="Yelloe" width="240">
 
 # Yelloe Agentic Playbook
 
-**How yelloe builds software with coding agents.**
+**How Yelloe builds software with coding agents.**
 
 </div>
 
 ---
 
-This repo is the source of truth for the skills that yelloe shares. It holds the skills, the tools
+This repo is the source of truth for the skills that Yelloe shares. It holds the skills, the tools
 that we recommend, and the modules that teach the thinking behind both.
 
 The repo is a skeleton. The contents are not in yet.
