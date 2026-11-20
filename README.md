@@ -106,7 +106,7 @@ For deeper UI work, we also recommend [Impeccable](https://github.com/pbakaus/im
 | --- | --- |
 | `skills/` | Skills, one folder each, with a `SKILL.md` at its root |
 | `flows/` | Scenarios that combine the skills, one page each |
-| `tools/` | The tools that we recommend, and how to set them up. Coming soon |
+| `tools/` | The tools that we recommend, and how to set them up. Start at [`tools/README.md`](tools/README.md) |
 | `third-party/` | Credits and licenses for work by other people |
 | `.claude-plugin/` | Plugin and marketplace manifests for Claude Code. The plugin name is `yelloe` |
 | `assets/` | Images for the docs |
