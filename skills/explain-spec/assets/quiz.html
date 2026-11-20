@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>[Spec name]: quiz</title>
+<style>
+  :root{
+    color-scheme:light;
+    --bg:#F4F7F6; --surface:#ffffff; --ink:#101D1B; --ink-2:#3A4B48; --muted:#64756F;
+    --line:#DCE4E1; --line-soft:#E9EEEC; --code:#E9EEEC; --accent:#A34A18;
+    --ok:#2C6A4C; --ok-soft:#E3EFE8; --bad:#B42318; --bad-soft:#FBE9E7; --warn-soft:#F4F7F6;
+    --font:"Helvetica Neue",Helvetica,Arial,sans-serif;
+    --serif:Charter,"Iowan Old Style",Georgia,"Times New Roman",serif;
+    --mono:Menlo,ui-monospace,SFMono-Regular,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;padding:48px 20px 96px;background:var(--bg);color:var(--ink);font:15px/1.5 var(--font);-webkit-font-smoothing:antialiased}
+  .wrap{max-width:900px;margin:0 auto}
+  h1{font-size:clamp(30px,5.5vw,44px);font-weight:700;line-height:1.05;letter-spacing:-.025em;margin:0}
+  h2{font-size:1.4rem;font-weight:700;line-height:1.2;letter-spacing:-.015em;margin:0 0 14px}
+  h1,h2{text-wrap:balance}
+  p,li{max-width:66ch;text-wrap:pretty}
+  p{font:16px/1.6 var(--serif);color:var(--ink-2);margin:0 0 14px}
+  p b,li b{color:var(--ink);font-weight:600}
+  ul{margin:0 0 16px;padding-left:20px}
+  li{font:15px/1.55 var(--serif);color:var(--ink-2);margin-bottom:6px}
+  code{background:var(--code);padding:1px 5px;border-radius:2px;font:.86em var(--mono)}
+  pre{background:var(--surface);border:1px solid var(--line);padding:14px 16px;border-radius:2px;overflow-x:auto;margin:0 0 16px;font:.84rem/1.55 var(--mono);white-space:pre}
+  pre code{background:none;padding:0;font-size:inherit}
+  .mast{display:flex;flex-direction:column;gap:14px;margin-bottom:48px}
+  .eyebrow{font:500 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+  section.part{margin-top:56px}
+  section.part:first-of-type{margin-top:0}
+  .label{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);padding-bottom:10px;border-bottom:2px solid var(--ink);margin-bottom:16px}
+  .k{font:10.5px var(--mono);letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+  .callout{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--accent);padding:13px 16px;margin:22px 0;max-width:66ch;font:15px/1.55 var(--serif);color:var(--ink-2)}
+  .callout b{color:var(--ink)}
+  .callout.ok{border-left-color:var(--ok)} .callout.bad{border-left-color:var(--bad)}
+  .diff{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);margin:16px 0 24px}
+  .diff > div{background:var(--surface);padding:14px 16px}
+  .diff .was .k{color:var(--bad)} .diff .now .k{color:var(--ok)}
+  .diff p{margin:6px 0 0;font-size:15px}
+  .input{background:var(--surface);border:1px solid var(--line);padding:14px 16px;margin:16px 0 0}
+  .input p{margin:6px 0 0;font-size:15px}
+  .steps{border-left:2px solid var(--line);padding-left:24px;margin:16px 0 24px 6px}
+  .step{position:relative;padding-bottom:20px}
+  .step:last-child{padding-bottom:0}
+  .step::before{content:"";position:absolute;left:-32px;top:5px;width:12px;height:12px;border-radius:50%;background:var(--bg);border:2px solid var(--accent)}
+  .step .sh{font-weight:700;margin-top:2px}
+  .step p{font-size:15px;margin:2px 0 0}
+  .qcard{background:var(--surface);border:1px solid var(--line);border-radius:2px;padding:14px 16px;margin:12px 0}
+  .qcard .k{color:var(--accent)}
+  .qcard .ql{font-weight:700;font-size:1.02rem;margin:4px 0}
+  .qcard .qw{font:15px/1.5 var(--serif);color:var(--ink-2)}
+  .opt{display:block;width:100%;text-align:left;font:inherit;font-size:.94rem;background:var(--surface);border:1px solid var(--line);border-radius:2px;padding:9px 12px;margin:6px 0;cursor:pointer;color:var(--ink)}
+  .opt:hover:not(:disabled){border-color:var(--accent)}
+  .opt:disabled{cursor:default}
+  .opt.right{border-color:var(--ok);background:var(--ok-soft)}
+  .opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+  .fb{margin-top:8px;padding:8px 12px;border-radius:2px}
+  .fb.ok{background:var(--ok-soft)} .fb.bad{background:var(--warn-soft);border:1px solid var(--line)}
+  @media (max-width:720px){
+    body{padding:32px 16px 80px}
+    .diff{grid-template-columns:1fr}
+  }
+  @media print{
+    body{padding:0;background:#fff}
+    .qcard,.callout,.diff,.step{break-inside:avoid}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="mast">
+    <div class="eyebrow">Spec quiz · [Area]</div>
+    <h1>[Spec name in a few words]</h1>
+  </header>
+
+  <section class="part" id="s1">
+    <div class="label">Background</div>
+    <h2>[How this part of the system works now]</h2>
+    <div class="callout"><b>Beginner layer, safe to skip.</b> [The basics a newcomer needs, in plain words.]</div>
+    <p>[The background that is specific to this spec.]</p>
+  </section>
+
+  <section class="part" id="s2">
+    <div class="label">Old and new</div>
+    <h2>[The core idea, stated as a point]</h2>
+    <div class="input"><div class="k">Input</div><p>[One toy input.]</p></div>
+    <div class="diff">
+      <div class="was"><div class="k">Now</div><p>[The result today.]</p></div>
+      <div class="now"><div class="k">After the build</div><p>[The result after the build.]</p></div>
+    </div>
+  </section>
+
+  <section class="part" id="s3">
+    <div class="label">The plan</div>
+    <h2>[What gets built, in order]</h2>
+    <div class="steps">
+      <div class="step"><div class="k">Step 1</div><div class="sh">[Group name]</div><p>[What changes and why.]</p></div>
+      <div class="step"><div class="k">Step 2</div><div class="sh">[Group name]</div><p>[What changes and why.]</p></div>
+    </div>
+  </section>
+
+  <section class="part" id="s4">
+    <div class="label">Quiz</div>
+    <h2>Five concepts to check before the build</h2>
+    <p>The first click on a question locks it. A miss shows a new angle and a backup question.</p>
+    <div id="quiz"></div>
+    <div id="summary" class="callout"></div>
+  </section>
+
+</div>
+
+<script>
+const QUIZ = [
+  {c:"[Concept name]", q:[
+    {t:"[Main question?]", o:["[Option A]","[Option B]","[Option C]","[Option D]"], a:2,
+     why:"[Why C is right.]",
+     again:"[The concept again, from a different angle, aimed at the likely misconception.]"},
+    {t:"[Backup question, new wording?]", o:["[Option A]","[Option B]","[Option C]","[Option D]"], a:0,
+     why:"[Why A is right.]",
+     again:""}]}
+];
+
+(function(){
+  const root=document.getElementById('quiz'), sum=document.getElementById('summary');
+  const state=QUIZ.map(()=>({main:null,backup:null}));
+  const L="ABCD";
+  function render(){
+    root.innerHTML='';
+    QUIZ.forEach((k,ci)=>{
+      const box=document.createElement('div');box.className='qcard';
+      box.innerHTML=`<div class="k">Concept ${ci+1} · ${k.c}</div>`;
+      [0,1].forEach(qi=>{
+        const s=state[ci], key=qi?'backup':'main';
+        if(qi===1 && !(s.main!==null && s.main!==k.q[0].a)) return;
+        const q=k.q[qi], d=document.createElement('div');d.style.marginTop=qi?'14px':'4px';
+        d.innerHTML=`<div class="ql">${qi?'Backup: ':''}${q.t}</div>`;
+        q.o.forEach((o,oi)=>{
+          const b=document.createElement('button');b.className='opt';b.textContent=L[oi]+'. '+o;
+          const picked=s[key];
+          if(picked!==null){b.disabled=true;if(oi===q.a)b.classList.add('right');else if(oi===picked)b.classList.add('wrong')}
+          b.onclick=()=>{if(s[key]!==null)return;s[key]=oi;render()};
+          d.appendChild(b);
+        });
+        if(s[key]!==null){
+          const ok=s[key]===q.a, f=document.createElement('div');f.className='qw fb '+(ok?'ok':'bad');
+          f.innerHTML=ok?`<b>Correct.</b> ${q.why}`:`<b>Not quite. The answer is ${L[q.a]}.</b> ${q.why}${q.again?' '+q.again:''}`;
+          d.appendChild(f);
+        }
+        box.appendChild(d);
+      });
+      root.appendChild(box);
+    });
+    const res=QUIZ.map((k,ci)=>{const s=state[ci];
+      if(s.main===k.q[0].a) return 'first';
+      if(s.main===null) return 'open';
+      if(s.backup===null) return 'open';
+      return s.backup===k.q[1].a?'second':'missed';});
+    const open=res.map((r,i)=>r==='open'?QUIZ[i].c:null).filter(Boolean);
+    const missed=res.map((r,i)=>r==='missed'?QUIZ[i].c:null).filter(Boolean);
+    const second=res.map((r,i)=>r==='second'?QUIZ[i].c:null).filter(Boolean);
+    sum.className='callout'+(missed.length?' bad':(open.length?'':' ok'));
+    if(!open.length && !missed.length) sum.innerHTML=`<b>PASSED.</b> ${second.length?'Missed on the first try: '+second.join(', ')+'.':'Every concept right on the first try.'} Reply in chat with this line.`;
+    else sum.innerHTML=`<b>${missed.length?'NOT PASSED yet.':'In progress.'}</b> ${open.length?'Open: '+open.join(', ')+'. ':''}${missed.length?'Missed twice: '+missed.join(', ')+'. Reply in chat with this line. ':''}${second.length?'Right on the backup: '+second.join(', ')+'.':''}`;
+  }
+  render();
+})();
+</script>
+</body>
+</html>
