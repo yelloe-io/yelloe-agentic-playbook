@@ -14,6 +14,8 @@ This repo holds the skills that Yelloe uses and shares, and the flows that combi
 
 Each skill works on its own. A skill can mention another skill as an option, but it never needs it. You combine them, and the flows show how.
 
+Yelloe also runs workshops that teach dev teams to work this way. See [yelloe.io](https://yelloe.io).
+
 ## Install
 
 In Claude Code:
@@ -104,7 +106,6 @@ For deeper UI work, we also recommend [Impeccable](https://github.com/pbakaus/im
 | --- | --- |
 | `skills/` | Skills, one folder each, with a `SKILL.md` at its root |
 | `flows/` | Scenarios that combine the skills, one page each |
-| `modules/` | Training modules on how to work with coding agents. Coming soon |
 | `tools/` | The tools that we recommend, and how to set them up. Coming soon |
 | `third-party/` | Credits and licenses for work by other people |
 | `.claude-plugin/` | Plugin and marketplace manifests for Claude Code. The plugin name is `yelloe` |
