@@ -6,5 +6,29 @@
     "name": "Yelloe"
   },
   "license": "MIT",
-  "skills": []
+  "skills": [
+    "./skills/batch",
+    "./skills/before-after",
+    "./skills/bro",
+    "./skills/build-spec",
+    "./skills/codebase-design",
+    "./skills/diagnosing-bugs",
+    "./skills/domain-modeling",
+    "./skills/explain-spec",
+    "./skills/grill-me",
+    "./skills/handoff",
+    "./skills/implement",
+    "./skills/improve-codebase-architecture",
+    "./skills/pr",
+    "./skills/prototype",
+    "./skills/retro",
+    "./skills/test-audit",
+    "./skills/to-issues",
+    "./skills/to-spec",
+    "./skills/ui-taste",
+    "./skills/verify",
+    "./skills/wayfinder",
+    "./skills/wizard",
+    "./skills/writing-for-agents"
+  ]
 }
