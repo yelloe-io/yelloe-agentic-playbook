@@ -1,6 +1,8 @@
 <div align="center">
 
 <img src="assets/logo.svg" alt="Yelloe" width="240">
+&nbsp;&nbsp;
+<img src="assets/duck.png" alt="The yelloe rubber duck" width="110">
 
 # Yelloe Agentic Playbook
 
